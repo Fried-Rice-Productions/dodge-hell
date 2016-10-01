@@ -21,11 +21,14 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	public Boundary boundary;
 
-	void Update
+	// Update is called once per frame
+	/*
+	void Update ()
 	{
 		Instantiate 
 	}
-	// Update is called once per frame
+	*/
+
 	void FixedUpdate ()
 	{
 		
