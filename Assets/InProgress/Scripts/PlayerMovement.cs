@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour {
 	public float speed;
 
 	private Transform playerTransform;
-	private Rigidbody2D rb;
 
 	private string horizontalAxis;
 	private string verticalAxis;
@@ -20,7 +19,6 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerTransform = GetComponent<Transform> ();
-		rb = GetComponent<Rigidbody2D> ();
 
 		horizontalAxis = "Player " + playerNumber + " Horizontal";
 		verticalAxis = "Player " + playerNumber + " Vertical";
