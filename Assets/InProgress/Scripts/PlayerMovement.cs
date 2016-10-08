@@ -8,63 +8,52 @@ public class Boundary
 }
 
 public class PlayerMovement : MonoBehaviour {
+	public int playerNumber;
 	public float speed;
 
-	private Transform transform;
+	private Transform playerTransform;
 	private Rigidbody2D rb;
 
+	private string horizontalAxis;
+	private string verticalAxis;
 
 	// Use this for initialization
 	void Start () {
-		transform = GetComponent<Transform> ();
+		playerTransform = GetComponent<Transform> ();
 		rb = GetComponent<Rigidbody2D> ();
+
+		horizontalAxis = "Player " + playerNumber + " Horizontal";
+		verticalAxis = "Player " + playerNumber + " Vertical";
 	}
 	public Boundary boundary;
 
-	// Update is called once per frame
-	/*
-	void Update ()
-	{
-		Instantiate 
-	}
-	*/
 
 	void FixedUpdate ()
 	{
 		
-	/*	rb.position = new Vector3 (
-			Mathf.Clamp (rb.position.x, boundary.xMin, boundary.xMax),
-			Mathf.Clamp (rb.position.y, boundary.xMin, boundary.xMax)
-		);*/
-		if (Input.GetKey (KeyCode.RightArrow)) {
-			transform.Translate (speed * Vector3.right * Time.deltaTime);
-			Vector3 clampedPosition = transform.position;
-			clampedPosition.x = Mathf.Clamp(transform.position.x, boundary.xMin, boundary.xMax);
-			clampedPosition.y = Mathf.Clamp(transform.position.y, boundary.yMin, boundary.yMax);
-			transform.position = clampedPosition;
+		if (Input.GetAxis(horizontalAxis) > 0) {
+			playerTransform.Translate (speed * Vector3.right * Time.deltaTime);
+			CheckBoundaries ();
 		}
-		if (Input.GetKey (KeyCode.LeftArrow)) {
-			transform.Translate (speed * Vector3.left * Time.deltaTime);
-			Vector3 clampedPosition = transform.position;
-			clampedPosition.x = Mathf.Clamp(transform.position.x, boundary.xMin, boundary.xMax);
-			clampedPosition.y = Mathf.Clamp(transform.position.y, boundary.yMin, boundary.yMax);
-			transform.position = clampedPosition;
+		if (Input.GetAxis (horizontalAxis) < 0) {
+			playerTransform.Translate (speed * Vector3.left * Time.deltaTime);
+			CheckBoundaries();
 		}
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			transform.Translate (speed * Vector3.up * Time.deltaTime);
-			Vector3 clampedPosition = transform.position;
-			clampedPosition.x = Mathf.Clamp(transform.position.x, boundary.xMin, boundary.xMax);
-			clampedPosition.y = Mathf.Clamp(transform.position.y, boundary.yMin, boundary.yMax);
-			transform.position = clampedPosition;
+		if (Input.GetAxis(verticalAxis) > 0) {
+			playerTransform.Translate (speed * Vector3.up * Time.deltaTime);
+			CheckBoundaries ();
 		}
-		if (Input.GetKey (KeyCode.DownArrow)) {
-			transform.Translate (speed * Vector3.down * Time.deltaTime);
-			Vector3 clampedPosition = transform.position;
-			clampedPosition.x = Mathf.Clamp(transform.position.x, boundary.xMin, boundary.xMax);
-			clampedPosition.y = Mathf.Clamp(transform.position.y, boundary.yMin, boundary.yMax);
-			transform.position = clampedPosition;
+		if (Input.GetAxis(verticalAxis) < 0) {
+			playerTransform.Translate (speed * Vector3.down * Time.deltaTime);
+			CheckBoundaries ();
 		}
-				//bounce back result of movement method conflicting with boxcollider boundaries
 	}
 
+	void CheckBoundaries ()
+	{
+		Vector3 clampedPosition = transform.position;
+		clampedPosition.x = Mathf.Clamp (playerTransform.position.x, boundary.xMin, boundary.xMax);
+		clampedPosition.y = Mathf.Clamp (playerTransform.position.y, boundary.yMin, boundary.yMax);
+		transform.position = clampedPosition;
+	}
 }
