@@ -12,14 +12,6 @@ public class shotBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//get shot current pos
-		Vector2 pos = transform.position;
-		 //compute new pos
-		pos = new Vector2(pos.x + speed * Time.deltaTime , pos.y);
-		//update current pos
-		transform.position = pos;
-
-		//destroy when leaves background
-
+		transform.Translate(speed * Vector3.right * Time.deltaTime);
 	}
 }

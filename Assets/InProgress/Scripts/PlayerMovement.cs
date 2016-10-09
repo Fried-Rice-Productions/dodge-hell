@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerTransform = GetComponent<Transform> ();
-
 		horizontalAxis = "Player " + playerNumber + " Horizontal";
 		verticalAxis = "Player " + playerNumber + " Vertical";
 	}
